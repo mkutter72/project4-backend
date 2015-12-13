@@ -7,6 +7,15 @@ module.exports = {
     deny : function(req, res) {
             res.sendStatus(405);
     },
+    checkAuth : function ensureAuthenticated(req, res, next) {
+        if (req.isAuthenticated()) {
+            next();
+        } else {
+            var err = new Error("Not authenticated!");
+            next(err);
+        }
+        // do not write code here
+    },
     root : {
         get : function(req, res) {
             res.json({
@@ -45,7 +54,7 @@ module.exports = {
                     res.sendStatus(200);
                 }).catch(function(err) {
                     next(err);
-                });            
+                });
         }
     },
     signup : {
