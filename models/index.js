@@ -5,6 +5,7 @@ mongoose.Promise = Promise;
 
 mongoose.model('User', require('./User'));
 mongoose.model('Mboard', require('./Mboard'));
+mongoose.model('Appointment', require('./Appointment'));
 
 mongoose.connect("mongodb://localhost/community-cares");
 
