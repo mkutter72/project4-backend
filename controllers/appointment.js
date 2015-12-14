@@ -9,31 +9,33 @@ module.exports = {
     },
     makenew : {
         post : function(req, res, next) {
-            res.json({title: "makenew appointment"});
-            // if(!req.body || !req.body.surveyname || !req.body.surveyquestion ) {
-            //     var err = new Error("Empty fields.");
-            //     return next(err);
-            // }
+            if(!req.body || !req.body.appUsername || !req.body.appDate || !req.body.appTime
+                || !req.body.appDescription ) {
+                var err = new Error("Empty fields.");
+                return next(err);
+            }
 
-            // var pResults = new Promise(function(resolve, reject) {
-            //     Result.create({
-            //         surveyName : req.body.surveyname,
-            //         surveyQuestion : req.body.surveyquestion
+            var pAppointment = new Promise(function(resolve, reject) {
+                Appointment.create({
+                    userName : req.body.appUsername,
+                    date : req.body.appDate,
+                    description : req.body.appDescription,
+                    time: req.body.appTime
 
-            //     }, function(err, user) {
-            //         if(err) {
-            //             reject(err);
-            //             return;
-            //         }
+                }, function(err, user) {
+                    if(err) {
+                        reject(err);
+                        return;
+                    }
 
-            //         resolve(user);
-            //     });
-            // });
-            // pResults.then(function() {
-            //     res.sendStatus(200);
-            // }).catch(function(err) {
-            //     next(err);
-            // });
+                    resolve(user);
+                });
+            });
+            pAppointment.then(function() {
+                res.sendStatus(200);
+            }).catch(function(err) {
+                next(err);
+            });
         }
     },
 
@@ -62,7 +64,12 @@ module.exports = {
 
     appointment : {
         get : function(req, res, next){
-            res.json({title: "get appointment"});
+         Appointment.find().exec().then(
+               function(result) {
+                res.json(result);
+            }).catch(function(error) {
+                next(error);
+            });
 
             // Result.findOne({surveyName: req.query.q}).exec().then(
             //    function(result) {

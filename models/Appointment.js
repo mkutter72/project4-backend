@@ -1,19 +1,27 @@
  'use strict';
 
-var uniqueValidator = require('mongoose-unique-validator');
+//var uniqueValidator = require('mongoose-unique-validator');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 // export a mongoose model
 
 var appointmentSchema = new Schema({
-  boardName : {
+  date : {
     type : String,
-    unique : true,
     required : true
   },
-    messages : {
-    type: []
-  }
+  userName : {
+    type : String,
+    required : true
+  },
+  description : {
+    type : String,
+    required : true
+  },
+  time : {
+    type : String,
+    required : true
+  },
 });
 
 module.exports = appointmentSchema;
