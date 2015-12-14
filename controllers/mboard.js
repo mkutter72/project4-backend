@@ -9,8 +9,7 @@ module.exports = {
     },
     makenew : {
         post : function(req, res, next) {
-            console.log("makenew-post");
-            res.json({title: "makenew"});
+            res.json({title: "makenew messageboard"});
             // if(!req.body || !req.body.surveyname || !req.body.surveyquestion ) {
             //     var err = new Error("Empty fields.");
             //     return next(err);
@@ -41,8 +40,7 @@ module.exports = {
 
     update : {
         patch : function(req, res, next) {
-            console.log("update-patch");
-            res.json({title: "patch"});
+            res.json({title: "patch messageboard"});
 
             // if(!req.body || !req.body.takerage || !req.body.takercity || !req.body.takernickname || !req.body.surveyanswer || !req.body.surveyname ) {
             //     var err = new Error("Empty fields.");
@@ -64,8 +62,7 @@ module.exports = {
 
     mboard : {
         get : function(req, res, next){
-            console.log("board-get");
-            res.json({title: "get"});
+            res.json({title: "get messageboard"});
 
             // Result.findOne({surveyName: req.query.q}).exec().then(
             //    function(result) {
@@ -79,8 +76,7 @@ module.exports = {
 
     destroy: {
         delete : function(req, res, next) {
-            console.log("destroy");
-            res.json({title: "destroy"});
+            res.json({title: "destroy messageboard"});
 
             // console.log(req.query.q);
             // Result.remove({surveyName: req.query.q}).then(function() {

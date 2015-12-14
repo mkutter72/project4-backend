@@ -19,7 +19,7 @@ get(appointmentCtrl.deny).
 patch(appointmentCtrl.update.patch);
 
 
-router.route('/board').
+router.route('/appointment').
 //all(authCtrl.checkAuth).
 get(appointmentCtrl.deny).
 get(appointmentCtrl.appointment.get);
