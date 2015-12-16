@@ -2,10 +2,10 @@
 
 
 var Mboard = require('../models').model('Mboard');
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+// var express = require('express');
+// var app = require('../app');
+// var http = require('http').Server(app);
+// var io = require('socket.io')(http);
 
 module.exports = {
     deny : function(req, res) {
@@ -89,20 +89,20 @@ module.exports = {
      }
 };
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-});
+// io.on('connection', function(socket){
+//   console.log('a user connected');
+//   socket.on('disconnect', function(){
+//     console.log('user disconnected');
+//   });
+// });
 
-io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-    console.log('message: ' + msg);
-  });
-});
+// io.on('connection', function(socket){
+//   socket.on('chat message', function(msg){
+//     io.emit('chat message', msg);
+//     console.log('message: ' + msg);
+//   });
+// });
 
-http.listen(process.env.PORT, function(){
-  console.log('listening on *:' + process.env.PORT);
-});
+// http.listen(process.env.PORT, function(){
+//   console.log('listening on *:' + process.env.PORT);
+// });
