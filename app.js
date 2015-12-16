@@ -35,7 +35,7 @@ app.use(session({
 	resave : false,
 	saveUninitialized : false,
 	store : new MongoStore({
-		url : "mongodb://localhost/ga-passport-sessions"
+		url : process.env.MONGOLAB_URI
 	}),
 	cookie : {
 		maxAge : 300000 // 5 minutes
