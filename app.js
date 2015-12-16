@@ -6,9 +6,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var uuid = require('uuid');
 var MongoStore = require('connect-mongo')(session);
-var http = require('http').Server(express);
-var io = require('socket.io')(http);
-
 
 process.env.SESSION_SECRET || require('dotenv').load();
 // require passport
@@ -92,21 +89,5 @@ app.use(function(err, req, res, next) {
   });
 });
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-});
 
-io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-    console.log('message: ' + msg);
-  });
-});
-
-http.listen(3030, function(){
-  console.log('listening on *:3030');
-});
 module.exports = app;

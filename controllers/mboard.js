@@ -2,6 +2,9 @@
 
 
 var Mboard = require('../models').model('Mboard');
+var express = require('express');
+var http = require('http').Server(express);
+var io = require('socket.io')(http);
 
 module.exports = {
     deny : function(req, res) {
@@ -83,7 +86,22 @@ module.exports = {
             // });
         }
      }
-
-
-
 };
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+    console.log('message: ' + msg);
+  });
+});
+
+http.listen(3030, function(){
+  console.log('listening on *:3030');
+});
