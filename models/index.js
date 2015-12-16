@@ -7,6 +7,6 @@ mongoose.model('User', require('./User'));
 mongoose.model('Mboard', require('./Mboard'));
 mongoose.model('Appointment', require('./Appointment'));
 
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect("mongodb://localhost/community-cares");
 
 module.exports = mongoose;
