@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var uuid = require('uuid');
 var MongoStore = require('connect-mongo')(session);
-var mongoose = require('models/index');
+var mongoose = require('./models/index');
 
 process.env.SESSION_SECRET || require('dotenv').load();
 // require passport
