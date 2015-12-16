@@ -38,7 +38,7 @@ module.exports = {
 
     update : {
         patch : function(req, res, next) {
-            if(!req.body || !req.body.messagetext || !req.body.boardname ) {
+            if(!req.body || !req.body.messagetext || !req.body.boardname || !req.user.userName) {
                 var err = new Error("Empty fields.");
                 return next(err);
 
@@ -47,7 +47,9 @@ module.exports = {
             var d = new Date();
             Mboard.update({boardName : req.body.boardname},
                 {$push: {
-                  messages: {userName: "TBD", mesageTime: d.toLocaleString(), messageText: req.body.messagetext}
+                  messages: {userName: req.user.userName,
+                  mesageTime: d.toLocaleString(),
+                  messageText: req.body.messagetext}
               }}).then(function() {
                 res.sendStatus(200).catch(function(error) {
                     next(error);
