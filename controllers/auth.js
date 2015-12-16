@@ -59,14 +59,15 @@ module.exports = {
     },
     signup : {
         post : function(req, res, next) {
-            if(!req.body || !req.body.username || !req.body.password) {
+            if(!req.body || !req.body.username || !req.body.password || !req.body.communityname) {
                 var err = new Error("No credentials.");
                 return next(err);
             }
 
             var pUser = new Promise(function(res, rej) {
                 User.create({
-                    userName : req.body.username
+                    userName : req.body.username,
+                    communityName: req.body.communityname
                 }, function(err, user) {
                     if(err) {
                         rej(err);

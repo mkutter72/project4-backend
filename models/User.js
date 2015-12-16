@@ -12,7 +12,11 @@ var userSchema = new Schema({
 		unique : true,
 		required : true
 	},
-	passwordDigest : String
+	passwordDigest : String,
+	communityName : {
+		type : String,
+		required : true
+	},
 });
 
 userSchema.plugin(uniqueValidator);
