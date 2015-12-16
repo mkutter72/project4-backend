@@ -3,7 +3,8 @@
 
 var Mboard = require('../models').model('Mboard');
 var express = require('express');
-var http = require('http').Server(express);
+var app = express();
+var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 module.exports = {
@@ -103,5 +104,5 @@ io.on('connection', function(socket){
 });
 
 http.listen(process.env.PORT, function(){
-  console.log('listening on *:3030');
+  console.log('listening on *:' + process.env.PORT);
 });
