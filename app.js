@@ -21,7 +21,7 @@ var appointment = require('./routes/appointment');
 var app = express();
 
 app.use(cors({
- origin: ['http://localhost:5000'],
+ origin: ['http://localhost:5000', 'http://mkutter72.github.io'],
  credentials: true
 }));
 
