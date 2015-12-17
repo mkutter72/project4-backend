@@ -62,26 +62,37 @@ module.exports = {
 
     mboard : {
         get : function(req, res, next){
-            Mboard.findOne({boardName: req.query.q}).exec().then(
-               function(result) {
-                res.json(result);
-            }).catch(function(error) {
-                next(error);
-            });
+            if (req.query.q) {
+                Mboard.findOne({boardName: req.query.q}).exec().then(
+                   function(result) {
+                    res.json(result);
+                }).catch(function(error) {
+                    next(error);
+                });
+            } else {
+               Mboard.find({}).exec().then(
+                    function(result) {
+                    console.log("length: " +result.length);
+                    var retarry= [];
+                    for (var i=0; i < result.length; i++)
+                        retarry[i] = result[i].boardName;
 
+                    var retjson = {"boardnames": retarry};
+                    res.json(retjson);
+                }).catch(function(error) {
+                    next(error);
+                });
+            }
         }
     },
 
     destroy: {
         delete : function(req, res, next) {
-            res.json({title: "destroy messageboard"});
-
-            // console.log(req.query.q);
-            // Result.remove({surveyName: req.query.q}).then(function() {
-            //     res.sendStatus(200).catch(function(error) {
-            //         next(error);
-            //     });
-            // });
+            Mboard.remove({boardName: req.query.q}).then(function() {
+                res.sendStatus(200).catch(function(error) {
+                    next(error);
+                });
+            });
         }
      }
 };
