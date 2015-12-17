@@ -9,7 +9,7 @@ module.exports = {
     },
     makenew : {
         post : function(req, res, next) {
-            if(!req.body || !req.body.appUsername || !req.body.appDate || !req.body.appTime
+            if(!req.body || !req.user.userName || !req.body.appDate || !req.body.appTime
                 || !req.body.appDescription ) {
                 var err = new Error("Empty fields.");
                 return next(err);
@@ -17,7 +17,7 @@ module.exports = {
 
             var pAppointment = new Promise(function(resolve, reject) {
                 Appointment.create({
-                    userName : req.body.appUsername,
+                    userName : req.user.userName,
                     date : req.body.appDate,
                     description : req.body.appDescription,
                     time: req.body.appTime
