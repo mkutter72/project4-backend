@@ -5,7 +5,8 @@ https://github.com/mkutter72/project4-frontend-II/blob/master/README.md
 
 ## Collections Definitions for Database
 * Users : This collection will be used for the creators of the surveys
-* Completed_surveys : This collection will show the cumalitive answers to the survey questions along with the city and age of the survey taker
+* Appointments : This collection stores the appointments that are displayed on the calendar
+* MessageBoard:   This collection stores the history of the chat session.   The collection holds documents which represents different message boards
 
 ###Collections for User and User Authentication
 These collections, models and routers originate from https://github.com/ga-wdi-boston/express-passport
@@ -13,46 +14,40 @@ These collections, models and routers originate from https://github.com/ga-wdi-b
 ###Collection for Users
 * Users come from the default project of express-passport
 
-####Validations and Constraints for Users
-* user_name must be unique
-* random url must be unique
 
 
 
 ###Collections
 
-Survey Collection
-
-| surveyName | 'string'
-| surveyQuestion | 'string'
-| surveyURL | 'string'
-| surveyAnswers | []
-| surveyCreator |  'string'
-
-Results Collection
+####Message Board Collection
 
 | Field | Document |
 | :----- | :--- |
-| surveyName | 'string'
-| surveyQuestion | 'string'
-| takerAnswers | []
+| boardName | 'string'
+| messages | []
 
 
+####Apointments Collection
 
+| Field | Document |
+| :----- | :--- |
+| date | 'string'
+| userName | 'string'
+| description | 'string'
+| time | 'string'
 
-####Validations and Constraints for
-* Answer must be a number
-* Age must be a number
-* City must be a string
-
+####Validations and Constraints
+* boardName is required and must be unique
+* all fields are required for Appointments
 
 
 
 ###Associations
-* User has many surveys
-* Surveys belong to user
-* Survey has many questions
-* Each question belongs to a survey
+* A user has many appointments
+* A user has many message boards
+* A message boards has many messages
+* An appointment belongs to a single user
+* A message belongs to a single message board
 
 
 
