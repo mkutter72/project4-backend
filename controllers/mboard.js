@@ -46,6 +46,10 @@ module.exports = {
             };
 
             var d = new Date();
+            console.log("bname:" + req.body.boardname);
+            console.log("user:" + req.user.userName);
+            console.log("time:" + d.toLocaleString());
+            console.log("text:" + req.body.messagetext);
             Mboard.update({boardName : req.body.boardname},
                 {$push: {
                   messages: {userName: req.user.userName,
