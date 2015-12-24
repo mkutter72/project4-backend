@@ -83,14 +83,12 @@ module.exports = {
 
     destroy: {
         delete : function(req, res, next) {
-            res.json({title: "destroy appointment"});
-
-            // console.log(req.query.q);
-            // Result.remove({surveyName: req.query.q}).then(function() {
-            //     res.sendStatus(200).catch(function(error) {
-            //         next(error);
-            //     });
-            // });
+            console.log(req.query.q);
+            Appointment.remove({date: req.query.q}).then(function() {
+                res.sendStatus(200).catch(function(error) {
+                    next(error);
+                });
+            });
         }
      }
 
