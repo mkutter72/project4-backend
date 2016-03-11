@@ -10,7 +10,7 @@ module.exports = {
     makenew : {
         post : function(req, res, next) {
             if(!req.body || !req.body.userName || !req.body.postDate || !req.body.postText
-                || !req.body.postTitle || !req.body.photoPath ) {
+                || !req.body.postTitle ) {
                 var err = new Error("Empty fields.");
                 return next(err);
             }
