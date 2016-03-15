@@ -6,13 +6,19 @@ var router = express.Router();
 var wallpostCtrl = require('../controllers/wallpost');
 var authCtrl = require('../controllers/auth');
 
+var multer = require('multer');
+var storage = multer.memoryStorage();
+var image = multer({ storage });
+
 router.get('/', wallpostCtrl.retrieve.get);
 
-router.route('/makenew').
-//all(authCtrl.checkAuth).
-get(wallpostCtrl.deny).
-post(wallpostCtrl.makenew.post);
+// router.route('/makenew').
+// //all(authCtrl.checkAuth).
+// get(wallpostCtrl.deny).
+// post(wallpostCtrl.makenew.post);
 
+
+router.post('/makenew', image.single('image'), wallpostCtrl.makenew.post);
 
 router.route('/update').
 get(wallpostCtrl.deny).

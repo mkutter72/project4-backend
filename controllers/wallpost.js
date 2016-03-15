@@ -9,19 +9,25 @@ module.exports = {
     },
     makenew : {
         post : function(req, res, next) {
-            if(!req.body || !req.body.userName || !req.body.postDate || !req.body.postText
-                || !req.body.postTitle ) {
+            if(!req.body) {
+                console.log(req.body);
                 var err = new Error("Empty fields.");
+                console.log("empty fields")
                 return next(err);
             }
 
+            console.log("got here");
+            console.log(req.body);
+             console.log(req.file);
+
+            var d = new Date();
             var pWallpost = new Promise(function(resolve, reject) {
                 Wallpost.create({
-                    userName : req.body.userName,
-                    date : req.body.postDate,
-                    title : req.body.postTitle,
-                    text: req.body.postText,
-                    photo:req.body.photoPath
+                    userName : "Mike",
+                    date : d.toLocaleString(),
+                    title : req.body.title,
+                    text: req.body.caption,
+                    photo: "fake photo"
 
                 }, function(err, user) {
                     if(err) {
