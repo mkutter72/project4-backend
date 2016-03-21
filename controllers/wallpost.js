@@ -1,6 +1,6 @@
 'use strict';
 
-
+var awsUpLoad = require('../lib/aws-upload');
 var Wallpost = require('../models').model('Wallpost');
 
 module.exports = {
@@ -19,30 +19,39 @@ module.exports = {
             console.log(req.body);
             console.log(req.file);
 
-
             var d = new Date();
-            var pWallpost = new Promise(function(resolve, reject) {
-                Wallpost.create({
-                    userName : req.user.userName,
-                    date : d.toLocaleString(),
-                    title : req.body.title,
-                    text: req.body.caption,
-                    photo: ""
 
-                }, function(err, user) {
-                    if(err) {
-                        reject(err);
-                        return;
-                    }
+            if (!req.file) {
+                var pWallpost = new Promise(function(resolve, reject) {
+                    Wallpost.create({
+                        userName : req.user.userName,
+                        date : d.toLocaleString(),
+                        title : req.body.title,
+                        text: req.body.caption,
+                        photo: ""
 
-                    resolve(user);
+                    }, function(err, user) {
+                        if(err) {
+                            reject(err);
+                            return;
+                        }
+
+                        resolve(user);
+                    });
                 });
-            });
-            pWallpost.then(function() {
-                res.sendStatus(200);
-            }).catch(function(err) {
-                next(err);
-            });
+                pWallpost.then(function() {
+                    res.sendStatus(200);
+                }).catch(function(err) {
+                    next(err);
+                });
+            } else {
+                awsUpLoad(req.file.buffer, req.user.userName, req.body.title, req.body.caption, d.toLocaleString()).then(function(data){
+                    console.log(data);
+                    res.sendStatus(200);
+                }).catch(function(err) {
+                    next(err);
+                });
+            }
         }
     },
 
