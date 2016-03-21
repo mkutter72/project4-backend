@@ -16,18 +16,18 @@ module.exports = {
                 return next(err);
             }
 
-            console.log("got here");
             console.log(req.body);
-             console.log(req.file);
+            console.log(req.file);
+
 
             var d = new Date();
             var pWallpost = new Promise(function(resolve, reject) {
                 Wallpost.create({
-                    userName : "Mike",
+                    userName : req.user.userName,
                     date : d.toLocaleString(),
                     title : req.body.title,
                     text: req.body.caption,
-                    photo: "fake photo"
+                    photo: ""
 
                 }, function(err, user) {
                     if(err) {
