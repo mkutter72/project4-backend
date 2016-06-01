@@ -24,6 +24,12 @@ var wallpostSchema = new Schema({
   photo : {
     type : String
   },
+  imageWidth : {
+    type : String
+  },
+  imageHeight : {
+    type : String
+  },
 });
 
 module.exports = wallpostSchema;

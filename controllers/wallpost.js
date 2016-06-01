@@ -45,7 +45,7 @@ module.exports = {
                     next(err);
                 });
             } else {
-                awsUpLoad(req.file.buffer, req.user.userName, req.body.title, req.body.caption, d.toLocaleString()).then(function(data){
+                awsUpLoad(req.file.buffer, req.user.userName, req.body.title, req.body.caption, d.toLocaleString(),req.body.imageWidth,req.body.imageHeight).then(function(data){
                     console.log(data);
                     res.sendStatus(200);
                 }).catch(function(err) {
