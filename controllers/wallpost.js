@@ -16,9 +16,6 @@ module.exports = {
                 return next(err);
             }
 
-            console.log(req.body);
-            console.log(req.file);
-
             var d = new Date();
 
             if (!req.file) {
