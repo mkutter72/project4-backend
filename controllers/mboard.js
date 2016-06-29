@@ -40,10 +40,6 @@ module.exports = {
     update : {
         patch : function(req, res, next) {
             if(!req.body || !req.body.messagetext || !req.body.boardname || !req.user.userName) {
-            console.log("bname:" + req.body.boardname);
-            console.log("user:" + req.user.userName);
-            console.log("time:" + d.toLocaleString());
-            console.log("text:" + req.body.messagetext);
                 var err = new Error("Empty fields.");
                 return next(err);
 
