@@ -14,12 +14,10 @@ var wallpostSchema = new Schema({
     required : true
   },
   title : {
-    type : String,
-    required : true
+    type : String
   },
   text : {
-    type : String,
-    required : true
+    type : String
   },
   photo : {
     type : String
